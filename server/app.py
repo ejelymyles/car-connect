@@ -3,15 +3,22 @@
 # Standard library imports
 
 # Remote library imports
-from flask import request
+from flask import request, make_response, jsonify
 from flask_restful import Resource
 
 # Local imports
 from config import app, db, api
 # Add your model imports
+from models import User, Car, Review
 
 
-# Views go here!
+class Cars(Resource):
+    def get(self):
+        cars = [car.to_dict() for car in Car.query.all()]
+        return jsonify(cars)
+
+api.add_resource(Cars, '/cars')
+    
 
 @app.route('/')
 def index():
