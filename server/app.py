@@ -92,8 +92,8 @@ class UsersByID(Resource):
 api.add_resource(UsersByID, '/users/<int:id>')
 
 class Reviews(Resource):
-    def get(self, id):
-        reviews = Review.query.filter_by(car_id=id).all()
+    def get(self, car_id):
+        reviews = Review.query.filter_by(car_id=car_id).all()
         reviews_list = [review.to_dict() for review in reviews]
         return reviews_list, 200
 
@@ -116,8 +116,38 @@ class Reviews(Resource):
 
     #     return{'Review added succesfully!'}, 201
 
-api.add_resource(Reviews, '/cars/<int:id>/reviews')
+api.add_resource(Reviews, '/cars/<int:car_id>/reviews')
 
+class ReviewsById(Resource):
+    def get(self, car_id, review_id):
+        review = Review.query.filter_by(car_id=car_id, review_id=review_id).first()
+        if not review:
+            return{'Review not found'}, 404
+        return review.to_dict(), 200
+
+    # def patch(self, car_id, review_id):
+    #     data = request.get_json()
+    #     review = Review.query.filter_by(car_id=car_id, review_id=review_id).first()
+    #     if not review:
+    #         return{'Review not found'}, 404
+    #     if 'rating' in data:
+    #         review.rating = data['rating']
+    #     if 'comments' in data:
+    #         review.comments = data['comments']
+    #     db.session.commit()
+    #     return review.to_dict(), 200
+
+    # def delete(self, car_id, review_id):
+    #     review = Review.query.filter_by(car_id=car_id, review_id=review_id).first()
+    #     if not review:
+    #         return {'Review not found'}, 404
+        
+    #     db.session.delete(review)
+    #     db.session.commit()
+    #     return{'message': 'Review deleted successfully'}, 200
+
+
+api.add_resource(Reviews, '/cars/<int:car_id>/reviews/<int:review_id>')
 
 
 @app.route('/')
