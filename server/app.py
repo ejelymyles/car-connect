@@ -83,6 +83,14 @@ class Users(Resource):
 
 api.add_resource(Users, '/users')
 
+class UsersByID(Resource):
+    def get(self, id):
+        user = User.query.filter_by(id=id).first().to_dict()
+        return make_response(jsonify(user), 200)
+
+
+api.add_resource(UsersByID, '/users/<int:id>')
+
 @app.route('/')
 def index():
     return '<h1>Project Server</h1>'

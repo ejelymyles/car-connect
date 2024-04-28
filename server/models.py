@@ -5,6 +5,25 @@ from sqlalchemy.orm import validates
 
 from config import db
 
+
+class Review(db.Model, SerializerMixin):
+    __tablename__ = 'reviews'
+
+    __table_args__ = (db.CheckConstraint('rating >= 1 AND rating <=5'),)
+
+    serialize_only = ('id', 'rating', 'comments', 'user_id', 'car_id',)
+
+    id = db.Column(db.Integer, primary_key=True)
+    rating = db.Column(db.Integer, nullable=False)
+    comments = db.Column(db.String)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    car_id = db.Column(db.Integer, db.ForeignKey('cars.id'))
+
+
+    def __repr__(self):
+        return f'<Review {self.id}, {self.rating}, {self. comments}, {self.user.username}, {self.car_id}>'
+
+
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
 
@@ -38,6 +57,7 @@ class Car(db.Model, SerializerMixin):
     )
 
     serialize_only = ('id', 'make', 'model', 'year', 'mileage', 'price', 'description',)
+    # serialize_rules = ('-users.cars')
     
     id = db.Column(db.Integer, primary_key=True)
     make = db.Column(db.String, nullable=False)
@@ -55,19 +75,20 @@ class Car(db.Model, SerializerMixin):
         return f'<Car {self.year}, {self.make}, {self.model}>'
 
 
-class Review(db.Model, SerializerMixin):
-    __tablename__ = 'reviews'
 
-    __table_args__ = (db.CheckConstraint('rating >= 1 AND rating <=5'),)
+# class Review(db.Model, SerializerMixin):
+#     __tablename__ = 'reviews'
 
-    serialize_only = ('id', 'rating', 'comments', 'user.username', 'car.id',)
+#     __table_args__ = (db.CheckConstraint('rating >= 1 AND rating <=5'),)
 
-    id = db.Column(db.Integer, primary_key=True)
-    rating = db.Column(db.Integer, nullable=False)
-    comments = db.Column(db.String)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    car_id = db.Column(db.Integer, db.ForeignKey('cars.id'))
+#     serialize_only = ('id', 'rating', 'comments', 'user_id', 'car_id',)
+
+#     id = db.Column(db.Integer, primary_key=True)
+#     rating = db.Column(db.Integer, nullable=False)
+#     comments = db.Column(db.String)
+#     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+#     car_id = db.Column(db.Integer, db.ForeignKey('cars.id'))
 
 
-    def __repr__(self):
-        return f'<Review {self.id}, {self.rating}, {self. comments}, {self.user.username}, {self.car_id}>'
+#     def __repr__(self):
+#         return f'<Review {self.id}, {self.rating}, {self. comments}, {self.user.username}, {self.car_id}>'
