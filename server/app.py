@@ -18,6 +18,17 @@ class Cars(Resource):
         return jsonify(cars)
 
 api.add_resource(Cars, '/cars')
+
+
+class CarsByID(Resource):
+    def get(self, id):
+        car = Car.query.filter_by(id=id).first().to_dict()
+        if car:
+            return car, 200
+        else:
+            return {"Error":"Car not found"}, 404
+
+api.add_resource(CarsByID, '/cars/<int:id>')
     
 
 @app.route('/')
