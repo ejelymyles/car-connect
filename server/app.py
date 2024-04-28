@@ -17,6 +17,22 @@ class Cars(Resource):
         cars = [car.to_dict() for car in Car.query.all()]
         return jsonify(cars)
 
+    # def post(self):
+    #     data = request.get_json()
+    #     new_car = Car(
+    #         make=data['make'],
+    #         model=data['model'],
+    #         year=data['year'],
+    #         mileage=data['mileage'],
+    #         price=data['price'],
+    #         description=data['description'],
+    #     )
+    #     db.session.add(new_car)
+    #     db.session.commit()
+
+    #     return make_response(new_car.to_dict(), 201)
+
+
 api.add_resource(Cars, '/cars')
 
 
@@ -27,6 +43,7 @@ class CarsByID(Resource):
             return car, 200
         else:
             return {"Error":"Car not found"}, 404
+
 
 api.add_resource(CarsByID, '/cars/<int:id>')
     
