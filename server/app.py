@@ -15,7 +15,7 @@ from models import User, Car, Review
 class Cars(Resource):
     def get(self):
         cars = [car.to_dict() for car in Car.query.all()]
-        return jsonify(cars)
+        return cars, 200
 
     # def post(self):
     #     data = request.get_json()
@@ -90,6 +90,20 @@ class UsersByID(Resource):
 
 
 api.add_resource(UsersByID, '/users/<int:id>')
+
+class Reviews(Resource):
+    def get(self, id):
+        reviews = Review.query.filter_by(car_id=id).all()
+        reviews_list = [review.to_dict() for review in reviews]
+        return reviews_list, 200
+
+    def post(self, id):
+        
+
+
+api.add_resource(Reviews, '/cars/<int:id>/reviews')
+
+
 
 @app.route('/')
 def index():
