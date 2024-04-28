@@ -62,7 +62,14 @@ class CarsByID(Resource):
 
 
 api.add_resource(CarsByID, '/cars/<int:id>')
-    
+
+
+class Users(Resource):
+    def get(self):
+        users = [user.to_dict() for user in User.query.all()]
+        return jsonify(users)
+
+api.add_resource(Users, '/users')
 
 @app.route('/')
 def index():

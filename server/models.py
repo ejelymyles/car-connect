@@ -8,7 +8,7 @@ from config import db
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
 
-    serialize_only = ('id', 'username', 'email', 'bio', 'location', 'car.id', 'car.make', 'car.model', 'car.year',)
+    serialize_only = ('id', 'username', 'email', 'bio', 'location',)
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, nullable=False)
@@ -38,7 +38,7 @@ class Car(db.Model, SerializerMixin):
     )
 
     serialize_only = ('id', 'make', 'model', 'year', 'mileage', 'price', 'description',)
-
+    
     id = db.Column(db.Integer, primary_key=True)
     make = db.Column(db.String, nullable=False)
     model = db.Column(db.String, nullable=False)
