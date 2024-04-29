@@ -147,7 +147,7 @@ class ReviewsById(Resource):
     #     return{'message': 'Review deleted successfully'}, 200
 
 
-api.add_resource(Reviews, '/cars/<int:car_id>/reviews/<int:review_id>')
+api.add_resource(ReviewsById, '/cars/<int:car_id>/reviews/<int:review_id>')
 
 
 @app.route('/')
