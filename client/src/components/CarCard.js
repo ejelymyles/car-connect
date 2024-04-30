@@ -13,7 +13,7 @@ function CarCard({ car }){
                 <p>Price: ${price}</p>
                 <p>{description}</p>
             </li>
-            <NavLink exact to ="/" className="nav-link">View Car</NavLink>
+            <NavLink to={`/cars/${id}`} className="nav-link">View Car</NavLink>
         </div>
     )
 }
