@@ -20,7 +20,7 @@ function ReviewList (){
     
     return(
         <div>
-            <h1 className="full-list-header">Reviews </h1>
+            <h2 className="full-list-header">Reviews </h2>
             <ul className="reviews card-container">{reviews.map((review) => <ReviewCard key={review.id} review={review}/>)}</ul>
         </div>
     );

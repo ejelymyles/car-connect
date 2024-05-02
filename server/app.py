@@ -69,17 +69,17 @@ class Users(Resource):
         users = [user.to_dict() for user in User.query.all()]
         return jsonify(users)
 
-    # def post(self):
-    #     data = request.get_json()
-    #     new_user = User(
-    #         username=data['username'],
-    #         email=data['email'],
-    #         bio=['bio'],
-    #         location=['location']
-    #     )
-    #     db.session.add(new_user)
-    #     db.session.commit()
-    #     return make_response(new_user.to_dict(), 201)
+    def post(self):
+        data = request.get_json()
+        new_user = User(
+            username=data['username'],
+            email=data['email'],
+            bio=data['bio'],
+            location=data['location']
+        )
+        db.session.add(new_user)
+        db.session.commit()
+        return make_response(new_user.to_dict(), 201)
 
 api.add_resource(Users, '/users')
 

@@ -23,7 +23,7 @@ if __name__ == '__main__':
         Review.query.delete()
 
         print("Populating users...")
-        for i in range(5):
+        for i in range(10):
 
             full_bio = fake.paragraph(nb_sentences = 3)
             bio_preview = full_bio[:15] + '...'
@@ -39,7 +39,7 @@ if __name__ == '__main__':
 
         print("Populating cars...")
 
-        for i in range(7):
+        for i in range(20):
 
             full_description = fake.paragraph(nb_sentences = 4)
             description_preview = full_description[:25] + '...'
@@ -57,7 +57,7 @@ if __name__ == '__main__':
 
         print("Populating reviews...")
 
-        for i in range(3):
+        for i in range(30):
 
             full_comments = fake.paragraph(nb_sentences = 4)
             comments_preview = full_comments[:25] + '...'
