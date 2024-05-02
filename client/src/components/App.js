@@ -5,6 +5,7 @@ import CarsList from "./CarsList";
 import CarDetails from "./CarDetails";
 import UserList from "./UserList";
 import NewUserForm from "./NewUserForm";
+import NewCarForm from "./NewCarForm";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path="/owners" element={<UserList />} />
           <Route exact path="/" element={<CarsList cars={carData}/>} />
           <Route path="/newuser" element={<NewUserForm />} />
+          <Route path="/newcar" element={<NewCarForm />} />
         </Routes>
       </div>
   );
