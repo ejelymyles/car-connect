@@ -97,24 +97,18 @@ class Reviews(Resource):
         reviews_list = [review.to_dict() for review in reviews]
         return reviews_list, 200
 
-    # def post(self, id):
-    #     data = request.get_json()
-    #     if not data:
-    #         return {'error': 'No input data provided'}, 400
+    def post(self, car_id):
+        data = request.get_json()
 
-    #     user_id = data.get('user_id')
-    #     rating = data.get('user_id')
-    #     comments = data.get('comments')
-        
-    #     if not all([user_id, rating, comments]):
-    #         return{'error': 'missing required fields'}, 400
-        
-    #     new_review = Review(user_id=user_id, car_id=id, rating=rating, comments=comments)
-
-    #     db.session.add(new_review)
-    #     db.session.commit()
-
-    #     return{'Review added succesfully!'}, 201
+        new_review = Review(
+            rating = data['rating'],
+            comments = data['comments'],
+            # user_id = data['user_id'],
+            car_id = car_id
+        )
+        db.session.add(new_review)
+        db.session.commit()
+        return make_response(new_review.to_dict(), 201)
 
 api.add_resource(Reviews, '/cars/<int:car_id>/reviews')
 

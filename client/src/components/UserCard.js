@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 function UserCard({ user }){
 
@@ -12,7 +13,8 @@ function UserCard({ user }){
                 <p>User ID: {id}</p>
                 <p>Bio: {bio}</p>
                 <p>Location: {location}</p>
-            </li>            
+            </li>  
+            <NavLink to={`/users/${id}`} className="nav-link">View User Profile</NavLink>          
         </div>
     )
 }
