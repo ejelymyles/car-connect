@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import ReviewList from "./ReviewList";
 import ReviewForm from "./NewReviewForm";
 
@@ -7,6 +7,7 @@ function CarDetails() {
   const [car, setCar] = useState(null);
   const [showReviewForm, setShowReviewForm] = useState(false);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`/cars/${id}`)
@@ -33,6 +34,20 @@ function CarDetails() {
     });
   };
 
+  const handleDeleteCar = () => {
+    fetch(`/cars/${id}`, {
+      method: "DELETE",
+    })
+    .then((res) => {
+      if(res.ok) {
+        navigate("/");
+      }
+    })
+    .catch((error) => {
+      console.error("Error deleting car:", error);
+    });
+  };
+
 
   if (!car) {
     return <div>Loading...</div>;
@@ -49,7 +64,7 @@ function CarDetails() {
         <p>Description: {description}</p>
         <button onClick={toggleReviewForm}>Write A Review</button>
         <button>Edit Car Listing</button>
-        <button>Delete Car Listing</button>
+        <button onClick={handleDeleteCar}>Delete Car Listing</button>
       </div>
       <div>
         {showReviewForm && (<ReviewForm onSubmit={handleSubmitReview} onCancel={toggleReviewForm} />)} 

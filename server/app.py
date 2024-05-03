@@ -54,11 +54,11 @@ class CarsByID(Resource):
 
     #     return jsonify(car.to_dict()), 200
 
-    # def delete(self, id):
-    #     car = Car.query.filter_by(id=id).first()
-    #     db.session.delete(car)
-    #     db.session.commit()
-    #     return make_response({}, 204)
+    def delete(self, id):
+        car = Car.query.filter_by(id=id).first()
+        db.session.delete(car)
+        db.session.commit()
+        return make_response({}, 204)
 
 
 api.add_resource(CarsByID, '/cars/<int:id>')
@@ -119,17 +119,17 @@ class ReviewsById(Resource):
             return{'Review not found'}, 404
         return review.to_dict(), 200
 
-    # def patch(self, car_id, review_id):
-    #     data = request.get_json()
-    #     review = Review.query.filter_by(car_id=car_id, review_id=review_id).first()
-    #     if not review:
-    #         return{'Review not found'}, 404
-    #     if 'rating' in data:
-    #         review.rating = data['rating']
-    #     if 'comments' in data:
-    #         review.comments = data['comments']
-    #     db.session.commit()
-    #     return review.to_dict(), 200
+    def patch(self, car_id, review_id):
+        data = request.get_json()
+        review = Review.query.filter_by(car_id=car_id, id=review_id).first()
+        if not review:
+            return{'Review not found'}, 404
+        if 'rating' in data:
+            review.rating = data['rating']
+        if 'comments' in data:
+            review.comments = data['comments']
+        db.session.commit()
+        return review.to_dict(), 200
 
     def delete(self, car_id, review_id):
         review = Review.query.filter_by(car_id=car_id, id=review_id).first()
