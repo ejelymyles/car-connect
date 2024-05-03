@@ -17,11 +17,15 @@ function ReviewList (){
             console.error('Error fetching reviews:', error);
           });
       }, [id]);
+
+      const handleDelete = (reviewId) => {
+        setReviews(reviews.filter((review) => review.id !== reviewId));
+      };
     
     return(
         <div>
             <h2 className="full-list-header">Reviews </h2>
-            <ul className="reviews card-container">{reviews.map((review) => <ReviewCard key={review.id} review={review}/>)}</ul>
+            <ul className="reviews card-container">{reviews.map((review) => <ReviewCard key={review.id} review={review} onDelete={handleDelete}/>)}</ul>
         </div>
     );
 }

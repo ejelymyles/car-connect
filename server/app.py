@@ -114,7 +114,7 @@ api.add_resource(Reviews, '/cars/<int:car_id>/reviews')
 
 class ReviewsById(Resource):
     def get(self, car_id, review_id):
-        review = Review.query.filter_by(car_id=car_id, review_id=review_id).first()
+        review = Review.query.filter_by(car_id=car_id, id=review_id).first()
         if not review:
             return{'Review not found'}, 404
         return review.to_dict(), 200
@@ -131,14 +131,14 @@ class ReviewsById(Resource):
     #     db.session.commit()
     #     return review.to_dict(), 200
 
-    # def delete(self, car_id, review_id):
-    #     review = Review.query.filter_by(car_id=car_id, review_id=review_id).first()
-    #     if not review:
-    #         return {'Review not found'}, 404
+    def delete(self, car_id, review_id):
+        review = Review.query.filter_by(car_id=car_id, id=review_id).first()
+        if not review:
+            return {'Review not found'}, 404
         
-    #     db.session.delete(review)
-    #     db.session.commit()
-    #     return{'message': 'Review deleted successfully'}, 200
+        db.session.delete(review)
+        db.session.commit()
+        return{'message': 'Review deleted successfully'}, 200
 
 
 api.add_resource(ReviewsById, '/cars/<int:car_id>/reviews/<int:review_id>')
