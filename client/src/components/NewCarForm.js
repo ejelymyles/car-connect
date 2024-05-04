@@ -14,7 +14,8 @@ const formSchema = Yup.object().shape({
     description: Yup.string(),
 });
 
-function NewCarForm(){
+function NewCarForm({initialValues , onCancel}){
+
     const handleSubmit = (values, { setSubmitting }) => {
         fetch('/cars', {
             method: 'POST',
@@ -30,8 +31,22 @@ function NewCarForm(){
         });
     };
 
+    const handleEditCar = (values, setSubmitting) => {
+        fetch(`/cars/${initialValues.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(values, null, 2),
+        }).then((res) => {
+            if (res.ok) {
+                setSubmitting(false);
+            }
+        });
+    };
+
     const formik = useFormik({
-        initialValues: {
+        initialValues: initialValues || {
             make: '',
             model: '',
             year: '',
@@ -40,13 +55,19 @@ function NewCarForm(){
             description: '',
         },
         validationSchema: formSchema,
-        onSubmit: handleSubmit,
+        onSubmit: (values, { setSubmitting }) => {
+            if (initialValues && initialValues.id) {
+                handleEditCar(values, setSubmitting);
+            } else {
+                handleSubmit(values, setSubmitting);
+            }
+        }
     });
 
     return(
         <div>
-            <h1>Add New Cars</h1>
-            <form onSubmit={formik.handleSubmit}>
+            <h1>Enter Car Details</h1>
+            <form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
                 <label htmlFor='make'>Make</label>
                 <br />
                 <input id="make" name='make' onChange={formik.handleChange} value={formik.values.make} />
@@ -71,7 +92,8 @@ function NewCarForm(){
                 <br />
                 <input id="description" name='description' onChange={formik.handleChange} value={formik.values.description} />
                 <p style={{ color: 'red'}}>{formik.errors.description}</p>
-                <button type="submit" disabled={formik.isSubmitting}>Submit</button>
+                <button type="submit" disabled={formik.isSubmitting}>{initialValues && initialValues.id ? "Update Car Details" : "Submit New Car"}</button>
+                <button type="button" onClick={onCancel}>Cancel</button>
             </form>
         </div>
     )

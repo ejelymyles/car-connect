@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import ReviewList from "./ReviewList";
 import ReviewForm from "./NewReviewForm";
+import NewCarForm from "./NewCarForm";
 
 function CarDetails() {
   const [car, setCar] = useState(null);
   const [showReviewForm, setShowReviewForm] = useState(false);
+  const [editMode, setEditmode] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -21,6 +23,10 @@ function CarDetails() {
   const toggleReviewForm = () => {
     setShowReviewForm(!showReviewForm);
   };
+
+  const toggleEditMode = () =>{
+    setEditmode(!editMode);
+  }
 
   const handleSubmitReview = (values) => {
     fetch(`/cars/${id}/reviews`, {
@@ -53,7 +59,7 @@ function CarDetails() {
     return <div>Loading...</div>;
   }
 
-  const { year, make, model, mileage, price, description } = car;
+  const { year, make, model, mileage, price, description } = car
 
   return (
     <div>
@@ -63,7 +69,8 @@ function CarDetails() {
         <p>Price: ${price}</p>
         <p>Description: {description}</p>
         <button onClick={toggleReviewForm}>Write A Review</button>
-        <button>Edit Car Listing</button>
+        {editMode ? (
+          <NewCarForm initialValues={car} onCancel={toggleEditMode}/>) : (<button onClick={toggleEditMode}>Edit Car Listing</button>)}
         <button onClick={handleDeleteCar}>Delete Car Listing</button>
       </div>
       <div>

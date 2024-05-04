@@ -44,15 +44,19 @@ class CarsByID(Resource):
         else:
             return {"Error":"Car not found"}, 404
 
-    # def patch(self, id):
-    #     car = Car.query.filter_by(id=id).first()
-    #     request_data = request.get_json()
-    #     for attr, value in request_data.items():
-    #         setattr(car, attr, value)
+    def patch(self, id):
+        car = Car.query.get(id)
+        if car:
+            request_data = request.get_json()
+            for attr, value in request_data.items():
+                setattr(car, attr, value)
         
-    #     db.session.commit()
+            db.session.commit()
 
-    #     return jsonify(car.to_dict()), 200
+            return car.to_dict(), 200
+        else:
+            return{"Error": "Car not found"}, 404
+
 
     def delete(self, id):
         car = Car.query.filter_by(id=id).first()
