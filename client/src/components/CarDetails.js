@@ -74,7 +74,7 @@ function CarDetails() {
         <button onClick={handleDeleteCar}>Delete Car Listing</button>
       </div>
       <div>
-        {showReviewForm && (<ReviewForm onSubmit={handleSubmitReview} onCancel={toggleReviewForm} />)} 
+        {showReviewForm && (<ReviewForm initialValues={{rating: "", comments: "", user_id: ""}}onSubmit={handleSubmitReview} onCancel={toggleReviewForm} />)} 
         <ReviewList />
       </div>
     </div>

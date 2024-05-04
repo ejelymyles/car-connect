@@ -53,12 +53,12 @@ function ReviewCard({ review, onDelete }){
         <div>
             <li className="card">
                 {editMode ? (
-                    <ReviewForm initialValues={{rating, comments}} onSubmit={(values) => handleEditReview(values)} onCancel={toggleEditMode} />
+                    <ReviewForm initialValues={{rating, comments }} onSubmit={(values) => handleEditReview(values)} onCancel={toggleEditMode} />
                 ) : (
                     <div>
                         <p>Rating: {rating} stars</p>
                         <p>Comments: {comments}</p>
-                        <p>User ID: {user_id}</p>
+                        <p>User: Anonymous User</p>
                     </div>
                 )}
             </li>

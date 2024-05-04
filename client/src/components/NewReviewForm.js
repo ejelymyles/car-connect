@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-function ReviewForm({ onSubmit, onCancel }) {
+function ReviewForm({ initialValues, onSubmit, onCancel }) {
 
   const formSchema = Yup.object().shape({
     rating: Yup.number().required("Rating is required")
@@ -13,8 +13,9 @@ function ReviewForm({ onSubmit, onCancel }) {
 
   const formik = useFormik({
     initialValues: {
-      rating: "",
-      comments: "",
+      rating: initialValues.rating || "",
+      comments: initialValues.comments || "",
+      user_id: initialValues.user_id || "",
     },
     validationSchema: formSchema,
     onSubmit: (values) => {
