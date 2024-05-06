@@ -12,8 +12,8 @@ function CarCard({ car }){
                 <p> Mileage: {mileage}</p>
                 <p>Price: ${price}</p>
                 <p>{description}</p>
+                <NavLink to={`/cars/${id}`} className="cardnav-link">View Car</NavLink>
             </li>
-            <NavLink to={`/cars/${id}`} className="nav-link">View Car</NavLink>
         </div>
     )
 }

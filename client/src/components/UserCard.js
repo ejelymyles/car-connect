@@ -8,13 +8,13 @@ function UserCard({ user }){
     return(
         <div>
             <li className="card">
-                <p>Username: {username}</p>
+                <h2>{username}</h2>
                 <p>Email: {email}</p>
                 <p>User ID: {id}</p>
                 <p>Bio: {bio}</p>
                 <p>Location: {location}</p>
+                <NavLink to={`/users/${id}`} className="cardnav-link">View User Profile</NavLink>          
             </li>  
-            <NavLink to={`/users/${id}`} className="nav-link">View User Profile</NavLink>          
         </div>
     )
 }

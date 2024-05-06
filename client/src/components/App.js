@@ -25,7 +25,6 @@ function App() {
       <div>
         <Header />
         <Routes>
-          {/* <CarsList cars={carData}/> */}
           <Route path="/cars/:id" element={<CarDetails />} />
           <Route path="/users/:id" element={<UserProfile />} />
           <Route path="/owners" element={<UserList />} />

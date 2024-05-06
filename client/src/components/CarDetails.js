@@ -63,7 +63,7 @@ function CarDetails() {
 
   return (
     <div>
-      <div>
+      <div className="car-details">
         <h1>{year} {make} {model}</h1>
         <p>Mileage: {mileage}</p>
         <p>Price: ${price}</p>

@@ -61,7 +61,6 @@ function ReviewCard({ review, onDelete }){
                         <p>User: Anonymous User</p>
                     </div>
                 )}
-            </li>
             {editMode ? (
                 <div>
                     <button onClick={toggleEditMode}>Cancel</button>
@@ -72,6 +71,7 @@ function ReviewCard({ review, onDelete }){
                     <button onClick={handleDelete}>Delete Review</button>
                 </div>    
             )}
+            </li>
         </div>
     );
 }
