@@ -14,7 +14,7 @@ function ReviewList (){
             setReviews(data);
           })
           .catch((error) => {
-            console.error('Error fetching reviews:', error);
+            console.error('Error collecting reviews:', error);
           });
       }, [id]);
 

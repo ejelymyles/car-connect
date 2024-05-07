@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Formik } from "formik";
-import * as Yup from "yup";
+// import { Formik } from "formik";
+// import * as Yup from "yup";
 import ReviewForm from "./NewReviewForm";
 
 
@@ -21,12 +21,12 @@ function ReviewCard({ review, onDelete }){
         })
         .then((response) =>{
             if (!response.ok) {
-                throw new Error("Network response was not ok");
+                throw new Error("Network response error");
             }
             onDelete(id);
         })
         .catch((error) => {
-            console.error("There was a problem with the fetch operation:", error);
+            console.error("There was a problem deleting the review:", error);
         })
     }
 
@@ -40,12 +40,12 @@ function ReviewCard({ review, onDelete }){
         })
         .then((response) => {
             if (!response.ok) {
-                throw new Error("Network response was not ok");
+                throw new Error("Network response error");
             }
             toggleEditMode();
         })
         .catch((error) => {
-            console.error("There was a problem with the fetch", error);
+            console.error("There was a problem updating the review", error);
         });
     }
 
