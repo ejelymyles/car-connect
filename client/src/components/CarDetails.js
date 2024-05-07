@@ -63,8 +63,8 @@ function CarDetails() {
 
   return (
     <div>
-      <div className="car-details">
-        <h1>{year} {make} {model}</h1>
+      <div className="details-page">
+        <h1 className="full-list-header">{year} {make} {model}</h1>
         <p>Mileage: {mileage}</p>
         <p>Price: ${price}</p>
         <p>Description: {description}</p>
@@ -73,7 +73,7 @@ function CarDetails() {
           <NewCarForm initialValues={car} onCancel={toggleEditMode}/>) : (<button onClick={toggleEditMode}>Edit Car Listing</button>)}
         <button onClick={handleDeleteCar}>Delete Car Listing</button>
       </div>
-      <div>
+      <div className="form">
         {showReviewForm && (<ReviewForm initialValues={{rating: "", comments: "", user_id: ""}}onSubmit={handleSubmitReview} onCancel={toggleReviewForm} />)} 
         <ReviewList />
       </div>

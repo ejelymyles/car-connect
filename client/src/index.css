@@ -1,15 +1,16 @@
-:root {
+/* :root {
   --bg: #282c34;
   --header: #fff;
   --link: #61dafb;
   --text: hsla(0, 0%, 100%, 0.88);
-}
-
+} */
 /* styles.css */
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  background-color: #DBC9E2;
 }
 
 .container {
@@ -19,8 +20,8 @@ body {
 }
 
 .header {
-  background-color: #333;
-  color: #fff;
+  background-color: #1D1160;
+  color: #E56020;
   padding: 10px 0;
   text-align: center;
 }
@@ -38,7 +39,7 @@ body {
 }
 
 .nav-link {
-  color: #0a78ee;
+  color: #f5f6f8;
   text-decoration: none;
   margin-right: 20px;
 }
@@ -62,7 +63,7 @@ body {
 .breakline {
   border: 0;
   height: 1px;
-  background: #333;
+  background: #f8f6f6;
   margin: 10px 0;
 }
 
@@ -77,10 +78,11 @@ body {
 }
 
 .card {
-  border: 2px solid #ddd;
+  border: 2px solid #E56020;
   border-radius: 10px;
   margin: 10px 0;
   padding: 20px;
+  background-color: #ddd;
 }
 
 .card h2 {
@@ -98,6 +100,7 @@ body {
   margin: 20px 0;
   padding: 0;
   text-align: center;
+  color: #1D1160;
 }
 
 button {
@@ -134,9 +137,14 @@ button[type="button"] {
   color: red;
 }
 
-.car-details {
+.details-page {
   text-align: center;
   margin-top: 70px;
   margin-bottom: 70px;
 
+}
+
+.form{
+  text-align: center;
+  margin-top: 50px;
 }

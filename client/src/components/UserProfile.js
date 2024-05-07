@@ -22,8 +22,8 @@ function UserProfile() {
 
   return (
     <div>
-      <div>
-        <h1>User Profile</h1>
+      <div className="details-page">
+        <h1 className="full-list-header">User Profile</h1>
         <p>Username: {username}</p>
         <p>Email: {email}</p>
         <p>Location: {location}</p>

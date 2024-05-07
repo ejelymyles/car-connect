@@ -65,8 +65,8 @@ function NewCarForm({initialValues , onCancel}){
     });
 
     return(
-        <div>
-            <h1>Enter Car Details</h1>
+        <div className='form'>
+            <h1 className="full-list-header">Enter Car Details</h1>
             <form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
                 <label htmlFor='make'>Make</label>
                 <br />

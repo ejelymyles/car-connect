@@ -38,8 +38,8 @@ function NewUserForm(){
     });
 
     return(
-        <div>
-            <h1>Add New Users</h1>
+        <div className='form'>
+            <h1 className="full-list-header">Add New Users</h1>
             <form onSubmit={formik.handleSubmit}>
                 <label htmlFor='username'>Username</label>
                 <br />
