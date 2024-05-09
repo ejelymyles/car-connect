@@ -23,7 +23,7 @@ if __name__ == '__main__':
         Review.query.delete()
 
         print("Populating users...")
-        for i in range(10):
+        for i in range(15):
 
             full_bio = fake.paragraph(nb_sentences = 3)
             bio_preview = full_bio[:15] + '...'
@@ -39,10 +39,10 @@ if __name__ == '__main__':
 
         print("Populating cars...")
 
-        for i in range(20):
+        for i in range(30):
 
-            full_description = fake.paragraph(nb_sentences = 4)
-            description_preview = full_description[:25] + '...'
+            # full_description = fake.paragraph(nb_sentences = 2)
+            # description_preview = full_description[:25] + '...'
 
             car = Car(
                 make = fake.random_element(elements=("Toyota", "Honda", "Ford", "Chevrolet", "BMW", "Audi", "Mercedes-Benz", "Nissan", "Volkswagen", "Tesla", "Subaru", "Hyundai", "Kia", "Mazda", "Lexus", "Jeep", "Volvo", "Porsche", "Buick", "Cadillac", "Chrysler", "Dodge")),
@@ -50,20 +50,20 @@ if __name__ == '__main__':
                 year = randint(1950, 2024),
                 mileage = randint(0, 200000),
                 price = randint(1000, 100000),
-                description = description_preview
+                description = fake.random_element(elements=("Great car!", "Runs well, will last you a lifetime", "Very reliable, maintains it's value over time", "perfect for off-roading and extreme weather conditions", "Never had a car like it!","The perfect family car", "Great for a little weekend fun"))
             )
             db.session.add(car)
         db.session.commit()
 
         print("Populating reviews...")
 
-        for i in range(30):
+        for i in range(50):
 
             full_comments = fake.paragraph(nb_sentences = 4)
             comments_preview = full_comments[:25] + '...'
 
-            user_id = randint(1, 5)
-            car_id = randint(1, 7)
+            user_id = randint(1, 15)
+            car_id = randint(1, 30)
 
             review = Review(
                 rating = randint(1, 5),
