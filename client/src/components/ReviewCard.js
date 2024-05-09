@@ -6,7 +6,7 @@ import ReviewForm from "./NewReviewForm";
 
 function ReviewCard({ review, onDelete }){
 
-    const{id, rating, comments, car_id, user_id } = review;
+    const{id, rating, comments, car_id, user_id, user:{username} } = review;
 
     const[editMode, setEditMode] = useState(false);
 
@@ -58,7 +58,7 @@ function ReviewCard({ review, onDelete }){
                     <div>
                         <p>Rating: {rating} stars</p>
                         <p>Comments: {comments}</p>
-                        <p>User: Anonymous User</p>
+                        <p>User: {username}</p>
                     </div>
                 )}
             {editMode ? (

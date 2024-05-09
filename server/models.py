@@ -6,24 +6,6 @@ from sqlalchemy.orm import validates
 from config import db
 
 
-# class Review(db.Model, SerializerMixin):
-#     __tablename__ = 'reviews'
-
-#     __table_args__ = (db.CheckConstraint('rating >= 1 AND rating <=5'),)
-
-#     serialize_only = ('id', 'rating', 'comments', 'user_id', 'car_id',)
-
-#     id = db.Column(db.Integer, primary_key=True)
-#     rating = db.Column(db.Integer, nullable=False)
-#     comments = db.Column(db.String)
-#     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-#     car_id = db.Column(db.Integer, db.ForeignKey('cars.id'))
-
-
-#     def __repr__(self):
-#         return f'<Review {self.id}, {self.rating}, {self. comments}, {self.user.username}, {self.car_id}>'
-
-
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
 
@@ -34,8 +16,7 @@ class User(db.Model, SerializerMixin):
     email = db.Column(db.String)
     bio = db.Column(db.String)
     location  = db.Column(db.String)
-
-    #association proxy to get cars for this user through reviews 
+ 
     cars = association_proxy('reviews', 'car', creator=lambda car_obj: Review(car=car_obj) )
 
     @validates('email')
@@ -56,8 +37,7 @@ class Car(db.Model, SerializerMixin):
         db.CheckConstraint('price >= 0'),
     )
 
-    serialize_only = ('id', 'make', 'model', 'year', 'mileage', 'price', 'description',)
-    # serialize_rules = ('-users.cars')
+    serialize_only = ('id', 'make', 'model', 'year', 'mileage', 'price', 'description','reviews.user', 'reviews.comments',)
     
     id = db.Column(db.Integer, primary_key=True)
     make = db.Column(db.String, nullable=False)
@@ -67,7 +47,6 @@ class Car(db.Model, SerializerMixin):
     price = db.Column(Numeric(10, 2), nullable=False)
     description = db.Column(db.String)
 
-    # association proxy to get users of this car through reviews 
     users = association_proxy('reviews', 'user', creator=lambda user_obj: Review(user=user_obj))
 
 
@@ -81,13 +60,16 @@ class Review(db.Model, SerializerMixin):
 
     __table_args__ = (db.CheckConstraint('rating >= 1 AND rating <=5'),)
 
-    serialize_only = ('id', 'rating', 'comments', 'user_id', 'car_id',)
+    serialize_only = ('id', 'rating', 'comments', 'user_id', 'car_id', 'user.username',)
 
     id = db.Column(db.Integer, primary_key=True)
     rating = db.Column(db.Integer, nullable=False)
     comments = db.Column(db.String)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     car_id = db.Column(db.Integer, db.ForeignKey('cars.id'))
+
+    user = db.relationship('User', backref=db.backref('reviews', lazy=True))
+    car = db.relationship('Car', backref=db.backref('reviews', lazy=True))
 
 
     def __repr__(self):

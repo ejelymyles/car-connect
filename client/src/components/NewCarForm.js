@@ -41,8 +41,13 @@ function NewCarForm({initialValues , onCancel}){
         }).then((res) => {
             if (res.ok) {
                 setSubmitting(false);
+                formik.resetForm();
             }
         });
+    };
+
+    const handleReset = () =>{
+        formik.resetForm();
     };
 
     const formik = useFormik({
@@ -61,13 +66,14 @@ function NewCarForm({initialValues , onCancel}){
             } else {
                 handleSubmit(values, setSubmitting);
             }
-        }
+        },
+        onReset: handleReset
     });
 
     return(
         <div className='form'>
             <h1 className="full-list-header">Enter Car Details</h1>
-            <form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
+            <form onSubmit={formik.handleSubmit} onReset={formik.onReset}>
                 <label htmlFor='make'>Make</label>
                 <br />
                 <input id="make" name='make' onChange={formik.handleChange} value={formik.values.make} />
