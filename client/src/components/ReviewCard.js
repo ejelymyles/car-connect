@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-// import { Formik } from "formik";
-// import * as Yup from "yup";
 import ReviewForm from "./NewReviewForm";
 
 
 function ReviewCard({ review, onDelete }){
 
-    const{id, rating, comments, car_id, user_id, user:{username} } = review;
+    const{id, rating, comments, car_id, user_id, user } = review;
+    const username = user ? user.username : null;
 
     const[editMode, setEditMode] = useState(false);
 

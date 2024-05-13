@@ -32,16 +32,24 @@ function NewCarForm({initialValues , onCancel}){
     };
 
     const handleEditCar = (values, setSubmitting) => {
+        const updatedCar = {
+            make: values.make,
+            model: values.model,
+            year: values.year,
+            mileage: values.mileage,
+            price: values.price,
+            description: values.description,
+          };
+
         fetch(`/cars/${initialValues.id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(values, null, 2),
+            body: JSON.stringify(updatedCar),
         }).then((res) => {
             if (res.ok) {
                 setSubmitting(false);
-                formik.resetForm();
             }
         });
     };

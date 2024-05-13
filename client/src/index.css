@@ -1,10 +1,4 @@
-/* :root {
-  --bg: #282c34;
-  --header: #fff;
-  --link: #61dafb;
-  --text: hsla(0, 0%, 100%, 0.88);
-} */
-/* styles.css */
+
 
 body {
   font-family: Arial, sans-serif;
@@ -146,4 +140,29 @@ button[type="button"] {
 .form{
   text-align: center;
   margin-top: 50px;
+}
+
+.review-form-container{
+  text-align: center;
+  margin-top: 50px;
+}
+
+.review-form-group {
+  margin-top: 10px;
+}
+
+.review-form-group label {
+  display: block;
+}
+
+
+.review-form-group textarea {
+  width: 15%;
+  padding: 15px;
+  margin-top: 2px;
+}
+
+.review-form-group input[type="number"] {
+  width: 5%;
+  margin-top: 2px;
 }

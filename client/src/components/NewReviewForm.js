@@ -24,13 +24,17 @@ function ReviewForm({ initialValues, onSubmit, onCancel }) {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <label htmlFor="rating">Rating:</label>
-      <input type="number" id="rating" name="rating" min="1" max="5" onChange={formik.handleChange} value={formik.values.rating}/>
-      {formik.errors.rating && ( <div style={{ color: "red" }}>{formik.errors.rating}</div>)}
-      <label htmlFor="comments">Comments:</label>
-      <textarea id="comments" name="comments" onChange={formik.handleChange} value={formik.values.comments} />
-      {formik.errors.comments && (<div style={{ color: "red" }}>{formik.errors.comments}</div>)}
+    <form onSubmit={formik.handleSubmit} className="review-form-container">
+      <div className="review-form-group">
+        <label htmlFor="rating">Rating:</label>
+        <input type="number" id="rating" name="rating" min="1" max="5" onChange={formik.handleChange} value={formik.values.rating}/>
+        {formik.errors.rating && ( <div style={{ color: "red" }}>{formik.errors.rating}</div>)}
+      </div>
+      <div className="review-form-group">
+        <label htmlFor="comments">Comments:</label>
+        <textarea id="comments" name="comments" onChange={formik.handleChange} value={formik.values.comments} />
+        {formik.errors.comments && (<div style={{ color: "red" }}>{formik.errors.comments}</div>)}
+      </div>
       <button type="submit">Submit</button>
       <button type="button" onClick={onCancel}>Cancel</button>
     </form>
