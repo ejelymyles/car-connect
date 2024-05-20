@@ -148,9 +148,7 @@ class ReviewsById(Resource):
 api.add_resource(ReviewsById, '/cars/<int:car_id>/reviews/<int:review_id>')
 
 
-@app.route('/')
-def index():
-    return '<h1>Project Server</h1>'
+
 
 
 if __name__ == '__main__':
